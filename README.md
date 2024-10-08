@@ -28,7 +28,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 2.Installez les dépendances :
 
 ```bash
-   cd recipe-backend npm install
+   cd recipe_api_bakend npm install
 ```
 
 ## Configuration de la Base de Données

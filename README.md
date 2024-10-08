@@ -22,7 +22,7 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
 1. Clonez le dépôt :
 
 ```bash
-   git clone https://github.com/AssaBaradji/recipe-backend.git
+   git clone https://github.com/AssaBaradji/recipe_api_bakend.git
 ```
 
 2.Installez les dépendances :

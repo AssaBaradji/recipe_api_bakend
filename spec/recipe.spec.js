@@ -2,7 +2,7 @@ import { Recipe } from "../src/models/Recipe.js";
 
 describe("Recipe Model Tests", () => {
   let recipeId;
-  const categoryId = 1; // Utilisez un ID de catégorie valide
+  const categoryId = 1; 
 
   it("can create a recipe", async () => {
     const recipe = {

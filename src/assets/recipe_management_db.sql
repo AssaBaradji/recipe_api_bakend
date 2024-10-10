@@ -1,10 +1,11 @@
-CREATE DATABASE recipe_management1;
-USE recipe_management1
 -- MySQL dump 10.13  Distrib 8.4.0, for Win64 (x86_64)
 --
--- Host: localhost    Database: recipe_management1
+-- Host: localhost    Database: recipe_management_db
 -- ------------------------------------------------------
 -- Server version	8.4.0
+
+CREATE DATABASE IF NOT EXISTS recipe_management_db;
+USE recipe_management_db;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,9 +27,10 @@ DROP TABLE IF EXISTS `categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +39,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Cuisine congolaise'),(2,'cuisine marocaine'),(3,'Cuisine Thaillandaise'),(4,'Cuisine Asiatique'),(6,'Cuisine Indienne'),(18,'cuisine sénégalaise'),(22,'Cuisine Malienne');
+INSERT INTO `categories` VALUES (7,'cuisine française'),(6,'cuisine indienne'),(4,'cuisine italienne'),(8,'cuisine japonaise'),(1,'cuisine marocaine'),(5,'cuisine mexicaine'),(2,'Cuisine Sénégalaise'),(9,'cuisine thaïlandaise'),(10,'Cuisine Togolaise'),(3,'cuisine viétnamienne');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,9 +57,10 @@ CREATE TABLE `recipes` (
   `ingredient` text NOT NULL,
   `category_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_category` (`category_id`),
-  CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `title` (`title`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `recipes_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +69,7 @@ CREATE TABLE `recipes` (
 
 LOCK TABLES `recipes` WRITE;
 /*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
-INSERT INTO `recipes` VALUES (17,'Salade chinoise','Poisson, Beurre, Ail, Thym, Gombo','Entrée',2),(19,'guinar','Plat principal','Poisson, Beurre, Ail, Thym, Gombo',2),(37,'yassa','Dessert','Poisson, Beurre, Ail, Thym, Gombo',2),(38,'Couscous aux Poulet','Plat','Semoule, Poulet, Légumes',1),(39,'Tajine d\'Agnneau','Plat','Agnneau, Épices, Légumes',1),(41,'Crêpes Sucrées','Dessert','Farine, Sucre, Lait, Oeufs',2),(42,'Msemen','Plat','Farine, Eau, Beurre',2),(44,'Athieké Poulet','Entrée','Poulet, huile, Ail, Thym, Gombo',1),(45,'tacos Poulet','Fruits de saison','Dessert',3);
+INSERT INTO `recipes` VALUES (1,'Soupe Légume','Plat','légumes frais',1),(2,'Yassa','Dessert','Poisson, Beurre, Ail, Thym, Gombo',1),(3,'Couscous aux Poulet','Plat','Semoule, Poulet, Légumes',2),(4,'Tajine d\'Agnneau','Plat','Agnneau, Épices, Légumes',2),(5,'Crêpes Sucrées','Dessert','Farine, Sucre, Lait, Oeufs',1),(6,'Athieké Poisson','Plat','Poulet, huile, Ail, Thym, Gombo',10),(7,'Tacos Poulet','Dessert','Fruits de saison',3),(8,'C\'bon Poulet','Dessert','Fruits de saison',3),(10,'Payela','Dessert','Fruits de mer',1),(11,'Pasta Arrabbiata','Plat','Pâtes, Tomates, Ail, Piment',4),(12,'Tacos al Pastor','Plat','Porc, Ananas, Oignons, Coriandre',5),(14,'Ratatouille','Plat','Légumes, Tomates, Basilic',7),(15,'Sushi','Plat','Riz, Poisson, Algue',8),(18,'Domoda','Dessert','Fruits de mer',2);
 /*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -79,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-08 23:48:18
+-- Dump completed on 2024-10-10  2:16:41

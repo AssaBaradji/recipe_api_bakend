@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bf2a3fdf-83ac-43b4-8d43-dc6af1f98a60",
+		"_postman_id": "c0e586d8-f15b-4248-87f7-1b3ef56ae8cf",
 		"name": "category collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "38098589"
@@ -52,14 +52,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \r\n        \"name\": \"Cuisine Thaillandaise\"\r\n    }",
+					"raw": "{\r\n \"name\": \"Cuisine Sénégalaise\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:3002/categories/3"
+				"url": "http://localhost:3002/categories/2"
 			},
 			"response": []
 		},
@@ -77,7 +77,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3002/categories/23"
+				"url": "http://localhost:3002/categories/3"
 			},
 			"response": []
 		}

@@ -1,23 +1,22 @@
-# Recette API
+# README pour le Backend - Recette API
 
 ## Description
 
-Ce projet backend a été développé en Express.js pour gérer des recettes via une API RESTful consommée par un frontend Vue.js. Le backend permet la gestion des recettes avec des fonctionnalités CRUD (Create, Read, Update, Delete) et est connecté à une base de données MySQL.
+Ce projet backend est développé avec **Express.js** pour gérer les recettes via une API RESTful. Il permet la gestion des recettes avec des fonctionnalités CRUD (Create, Read, Update, Delete) et est connecté à une base de données **MySQL**.
 
 ## Diagramme de Classes
 
-![Diagramme de Classes](./src/assets/Recette%20UML.png)
+![Diagramme de Classes](./src/assets/Diagramme%20de_Classe_des_Recettes.png)
 
 ## Prérequis
 
-Avant de commencer, assurez-vous d'avoir les éléments suivants installés :
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
-- Node.js
-- npm
+- [Node.js](https://nodejs.org) (version 14 ou supérieure)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [MySQL](https://www.mysql.com/)
 
 ## Installation
-
-Suivez ces étapes pour configurer le projet sur votre machine locale :
 
 1. Clonez le dépôt :
 
@@ -25,59 +24,49 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
    git clone https://github.com/AssaBaradji/recipe_api_bakend.git
 ```
 
-2.Installez les dépendances :
+2.Accédez au répertoire du projet :
 
 ```bash
-   cd recipe_api_bakend npm install
+   cd recipe_api_bakend
+```
+
+3.Installez les dépendances :
+
+```bash
+   npm install
 ```
 
 ## Configuration de la Base de Données
 
-1. Connectez-vous en tant qu'administrateur :
+1. Connectez-vous à MySQL :
 
 ```bash
    mysql -u root -p
 ```
 
-2.Dans le fichier `/assets/script.sql`, toutes les commandes pour créer la base de données, son utilisation et la création des tables sont incluses.
+2.Exécutez les commandes dans le fichier `/assets/script.sql` pour créer la base de données et les tables.
 
-3.Dans le fichier `/config/db.js`, remplacez vos informations d'identification dans la section suivante pour connecter l'application à votre base de données :
+3.Modifiez les informations d'identification dans `/config/db.js` :
 
-```bash
- {
+```javascript
+{
   user: "votre_nom_utilisateur",
   password: "votre_mot_de_passe",
   database: "votre_nom_de_base_de_données",
 }
-
 ```
-
-## Connexion Backend et Frontend
-
-Le frontend (Vue.js) interagit avec le backend via des API HTTP.
-
-- **Endpoints API :** Les requêtes sont envoyées aux endpoints définis, par exemple, pour récupérer toutes les recettes.
-- **Utilisation d'Axios :** La bibliothèque Axios facilite les appels HTTP.
-
-- **Gestion des CORS :** Assurez-vous que le backend gère les CORS en ajoutant le middleware CORS dans Express.
 
 ## Utilisation
 
-Pour démarrer le serveur backend, exécutez la commande appropriée dans le terminal.
+Pour démarrer le serveur backend, exécutez :
+
+```bash
+npm start
+```
 
 ## Tests avec Postman
 
 Importez la collection Postman incluse pour tester facilement les endpoints.
-
-- Utilisation
-
-```bash
-  npm start
-```
-
-- Tests avec Postman
-
-Dans le fichier `/assets/Recipe API.postman_collection.json`, une collection qui contient les quatre verbe Http pour testé les API
 
 ## Endpoints de l'API
 
@@ -101,13 +90,14 @@ Dans le fichier `/assets/Recipe API.postman_collection.json`, une collection qui
 - **Description :** Créer une nouvelle recette.
 - **Corps de la requête :**
 
-  ```json
-  {
-    "title": "Titre de la Recette",
-    "ingredient": "Liste des Ingrédients",
-    "type": "Type de Recette"
-  }
-  ```
+```json
+{
+  "title": "Titre de la Recette",
+  "type": "Type de Recette",
+  "ingredient": "Liste des Ingrédients",
+  "category_id": "ID de la catégorie"
+}
+```
 
 - **Réponse :** Retourne l'ID de la recette nouvellement créée.
 
@@ -117,13 +107,14 @@ Dans le fichier `/assets/Recipe API.postman_collection.json`, une collection qui
 - **Description :** Mettre à jour une recette existante par son ID.
 - **Corps de la requête :**
 
-  ```json
-  {
-    "title": "Titre Mis à Jour",
-    "ingredient": "Liste des Ingrédients Mise à Jour",
-    "type": "Type de Recette Mis à Jour"
-  }
-  ```
+```json
+{
+  "title": "Titre Mis à Jour",
+  "type": "Type de Recette Mis à Jour",
+  "ingredient": "Liste des Ingrédients Mise à Jour",
+  "category_id": "ID de la catégorie Mis à jour"
+}
+```
 
 - **Réponse :** Confirmation de la mise à jour réussie ou une erreur 404 si non trouvé.
 
@@ -141,37 +132,27 @@ Dans le fichier `/assets/Recipe API.postman_collection.json`, une collection qui
    - **Description :** Récupérer une seule Categorie par son ID.
    - **Réponse :** Objet Categorie ou une erreur 404 si non trouvé.
 
-2.**Récupérer Toutes les Recettes**
+2.**Récupérer Toutes les Categories**
 
 - **Point de terminaison :** `GET /categories`
 - **Description :** Récupérer toutes les categories de la base de données.
 - **Réponse :** Tableau d'objets categorie.
 
-  3.**Créer une Nouvelle Recette**
+  3.**Créer une Nouvelle Categorie**
 
 - **Point de terminaison :** `POST /categories`
 - **Description :** Créer une nouvelle categorie.
 - **Corps de la requête :**
 
-  ```json
-  {
-    "name": "nom de la Categorie"
-  }
-  ```
+```json
+{
+  "name": "nom de la Categorie"
+}
+```
 
 - **Réponse :** Retourne l'ID de la categorie nouvellement créée.
 
-  4.**Mettre à Jour une Recette par ID**
-
-- **Point de terminaison :** `PUT /categories/:id`
-- **Description :** Mettre à jour une categorie existante par son ID.
-- **Corps de la requête :**
-
-  ```json
-  {
-    "name": "nom Mis à jour"
-  }
-  ```
+  4.**Mettre à Jour une Categorie par ID**
 
 - **Réponse :** Confirmation de la mise à jour réussie ou une erreur 404 si non trouvé.
 
@@ -183,31 +164,28 @@ Dans le fichier `/assets/Recipe API.postman_collection.json`, une collection qui
 
 ## Tests Unitaires
 
-- tests unitaires pour notre modèle afin de vérifier que les actions CRUD fonctionnent correctement.
-
-la commande pour exécuter les tests :
+Pour exécuter les tests unitaires :
 
 ```bash
-  npm test
+npm test
 ```
 
 ## Analyse de Code et Formatage
 
-- **Intégration d'ESLint et Prettier :**
-- Executer ESLint pour l'analyse statique du code
+### Linting et Formatage
+
+- Pour exécuter ESLint :
 
 ```bash
-  npm run lint
+   npm run lint
 ```
 
-- Executer Prettier pour le formatage automatique du code.
+- Pour formater le code avec Prettier :
 
 ```bash
-  npn run format
+   npm run format
 ```
 
 ## Auteur
 
-## Contributeur
-
-[Assa baradji](https://github.com/AssaBaradji)
+[Assa Baradji](https://github.com/AssaBaradji)

@@ -37,7 +37,6 @@ class Category {
     }
   }
 
-
   static async updateCategory(id, name) {
     const connection = await pool.getConnection();
     try {

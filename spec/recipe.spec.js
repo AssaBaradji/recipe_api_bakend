@@ -40,6 +40,7 @@ describe("Recipe Model Tests", () => {
       title: "Updated Mafé",
       type: "Main",
       ingredient: "sel, eau, riz",
+      categoryId: 1
     };
 
     const result = await Recipe.updateRecipe(
@@ -47,6 +48,7 @@ describe("Recipe Model Tests", () => {
       updatedRecipe.title,
       updatedRecipe.type,
       updatedRecipe.ingredient,
+      updatedRecipe.categoryId
     );
     const updatedRecipeFromDb = await Recipe.getRecipes();
     const updatedRecipeObj = updatedRecipeFromDb.find((r) => r.id === recipeId);

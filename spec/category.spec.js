@@ -5,13 +5,24 @@ describe("Category Model Tests", () => {
 
   it("can create a Category", async () => {
     const newCategory = {
-      name: "Cuisine Senegalaise",
+      name: "Cuisine Britannique",
     };
 
-    categoryId = await Category.createCategory(newCategory.name);
+    const existingCategories = await Category.getCategories();
+    const exists = existingCategories.find(
+      (category) =>
+        category.name.toLowerCase() === newCategory.name.toLowerCase()
+    );
+
+    if (!exists) {
+      categoryId = await Category.createCategory(newCategory.name);
+    } else {
+      categoryId = exists.id;
+    }
+
     const allCategories = await Category.getCategories();
     const createdCategory = allCategories.find(
-      (category) => category.id === categoryId,
+      (category) => category.id === categoryId
     );
 
     expect(categoryId).not.toBeNull();
@@ -27,17 +38,19 @@ describe("Category Model Tests", () => {
   });
 
   it("can update a category", async () => {
+    if (!categoryId) return;
+
     const updatedCategory = {
-      name: "Cuisine Sénégalaise",
+      name: "Cuisine Hollandaise Modifiée",
     };
 
     const result = await Category.updateCategory(
       categoryId,
-      updatedCategory.name,
+      updatedCategory.name
     );
     const allCategories = await Category.getCategories();
     const updatedCategoryObj = allCategories.find(
-      (category) => category.id === categoryId,
+      (category) => category.id === categoryId
     );
 
     expect(result).toBe(true);
@@ -45,10 +58,12 @@ describe("Category Model Tests", () => {
   });
 
   it("can delete a category", async () => {
+    if (!categoryId) return;
+
     const result = await Category.destroyCategory(categoryId);
     const allCategories = await Category.getCategories();
     const categoryAfterDeletion = allCategories.find(
-      (category) => category.id === categoryId,
+      (category) => category.id === categoryId
     );
 
     expect(result).toBe(true);

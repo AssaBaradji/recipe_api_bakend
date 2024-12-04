@@ -18,6 +18,8 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 ## Installation
 
+Suivez ces étapes pour configurer le projet sur votre machine locale :
+
 1. Clonez le dépôt :
 
 ```bash
@@ -38,35 +40,25 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
 ## Configuration de la Base de Données
 
-1. Connectez-vous à MySQL :
+1. Créez un fichier `.env` à la racine du projet en vous basant sur le fichier `.env.example` fourni. Ce fichier contient les variables d'environnement nécessaires pour configurer la connexion à la base de données MySQL.
 
-```bash
-   mysql -u root -p
-```
+2. Dans le fichier `/assets/script.sql`, vous trouverez toutes les commandes SQL nécessaires pour créer la base de données et les tables associées.
 
-2.Exécutez les commandes dans le fichier `/assets/script.sql` pour créer la base de données et les tables.
-
-3.Modifiez les informations d'identification dans `/config/db.js` :
-
-```javascript
-{
-  user: "votre_nom_utilisateur",
-  password: "votre_mot_de_passe",
-  database: "votre_nom_de_base_de_données",
-}
-```
+3. L'application se connecte automatiquement à la base de données en utilisant les variables d'environnement définies dans le fichier `.env`.
 
 ## Utilisation
 
-Pour démarrer le serveur backend, exécutez :
+1. Démarrez l'application avec la commande suivante :
 
 ```bash
-npm start
+   npm start
 ```
+
+2.L'application sera disponible à l'adresse suivante : `http://localhost:3002`.
 
 ## Tests avec Postman
 
-Importez la collection Postman incluse pour tester facilement les endpoints.
+Une collection Postman est disponible dans le fichier `/assets/Recipe API.postman_collection.json` contenant des requêtes pour tester les différents endpoints de l'API.
 
 ## Endpoints de l'API
 
@@ -92,10 +84,11 @@ Importez la collection Postman incluse pour tester facilement les endpoints.
 
 ```json
 {
+  "id": 123,
   "title": "Titre de la Recette",
   "type": "Type de Recette",
   "ingredient": "Liste des Ingrédients",
-  "category_id": "ID de la catégorie"
+  "category_id": "Nom de la catégorie"
 }
 ```
 
@@ -109,10 +102,11 @@ Importez la collection Postman incluse pour tester facilement les endpoints.
 
 ```json
 {
-  "title": "Titre Mis à Jour",
-  "type": "Type de Recette Mis à Jour",
-  "ingredient": "Liste des Ingrédients Mise à Jour",
-  "category_id": "ID de la catégorie Mis à jour"
+  "id": 123,
+  "title": "Titre de la Recette",
+  "type": "Type de Recette",
+  "ingredient": "Liste des Ingrédients",
+  "category_id": "Nom de la catégorie"
 }
 ```
 
@@ -164,7 +158,9 @@ Importez la collection Postman incluse pour tester facilement les endpoints.
 
 ## Tests Unitaires
 
-Pour exécuter les tests unitaires :
+Des tests unitaires sont disponibles pour vérifier que les actions CRUD fonctionnent correctement.
+
+Exécutez les tests avec la commande suivante :
 
 ```bash
 npm test
@@ -172,15 +168,15 @@ npm test
 
 ## Analyse de Code et Formatage
 
-### Linting et Formatage
+- **ESLint et Prettier sont intégrés :**
 
-- Pour exécuter ESLint :
+  - Exécutez ESLint pour analyser statiquement le code :
 
 ```bash
    npm run lint
 ```
 
-- Pour formater le code avec Prettier :
+- Exécutez Prettier pour formater automatiquement le code :
 
 ```bash
    npm run format
